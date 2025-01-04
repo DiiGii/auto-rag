@@ -61,6 +61,10 @@ def add_pdf(assistant: Assistant, file: BytesIO):
     else:
         st.error("Failed to read the PDF.")
 
+# Query Assistant and return response
+def query_assistant(assistant: Assistant, query: str) -> str:
+    return "".join([x for x in assistant.run(query)])
+
 # Main function, handle Streamlit UI/UX
 def main():
     st.set_page_config(page_title="AutoRAG", layout="wide")
