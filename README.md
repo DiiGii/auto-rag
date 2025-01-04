@@ -1,2 +1,1 @@
-# auto-rag
-AutoRAG: Autonomous Retrieval-Augmented Generation 
+# AutoRAG: Autonomous Retrieval-Augmented Generation 
