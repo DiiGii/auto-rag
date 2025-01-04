@@ -25,29 +25,28 @@ def setup_assistant(api_key: str) -> Assistant:
     llm = OpenAIChat(model="gpt-4o-mini", api_key=api_key)
     # Setup Assistant
     return Assistant(
-        name="auto_rag_assistant",
-        llm=llm,
-        storage=PgAssistantStorage(table_name="auto_rag_storage", db_url=DB_URL)
+        name="auto_rag_assistant",  
+        llm=llm,  
+        storage=PgAssistantStorage(table_name="auto_rag_storage", db_url=DB_URL),  
         knowledge_base=AssistantKnowledge(
             vector_db=PgVector2(
-                db_url=DB_URL,
-                collection="auto_rag_docs",
-                embedder=OpenAIEmbedder(model="text-embedding-ada-002", dimensions=1536, api_key=api_key),
+                db_url=DB_URL,  
+                collection="auto_rag_docs",  
+                embedder=OpenAIEmbedder(model="text-embedding-ada-002", dimensions=1536, api_key=api_key),  
             ),
-            num_documents=3,
+            num_documents=3,  
         ),
-        # DuckDuckGo for web search
-        tools=[DuckDuckGo()],
+        tools=[DuckDuckGo()],  # DuckDuckGo for web search
         instructions=[
-            "First, search your knowledge base.",
-            "Then, if not found search the internet.",
-            "Finally, provide clear and concise answers.",
+            "Search your knowledge base first.",  
+            "If not found, search the internet.",  
+            "Provide clear and concise answers.",  
         ],
-        show_tool_calls=True,
-        search_knowledge=True,
-        read_chat_history=True,
-        markdown=True,
-        debug_mode=True,
+        show_tool_calls=True,  
+        search_knowledge=True,  
+        read_chat_history=True,  
+        markdown=True,  
+        debug_mode=True,  
     )
 
 # Add a PDF to the knowledge base
