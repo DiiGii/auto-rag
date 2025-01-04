@@ -69,3 +69,28 @@ def query_assistant(assistant: Assistant, query: str) -> str:
 def main():
     st.set_page_config(page_title="AutoRAG", layout="wide")
     st.title("AutoRAG: Autonomous RAG")
+
+    api_key = st.sidebar.text_input("Enter your OpenAI API Key", type="password")
+    if not api_key:
+        st.sidebar.warning("Enter OpenAI API Key to continue.")
+        st.stop()
+    
+    assistant = setup_assistant(api_key)
+    
+    uploaded_file = st.sidebar.file_uploader("Upload PDFs", type=["pdf"])
+    if uploaded_file and st.sidebar.button("Add to Knowledge Base"):
+        add_pdf(assistant, BytesIO(uploaded_file.read()))
+    
+    query = st.text_input("Ask your questions:")
+
+    if st.button("Get answer"):
+        # Check for empty questions
+        if query.strip():
+            with st.spinner("Thinking..."):
+                response = query_assistant(assistant, query)
+                st.write("**Response:**", response)
+        else:
+            st.error("Please enter your question.")
+
+if __name__ == "__main__":
+    main()
