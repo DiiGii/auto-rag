@@ -80,7 +80,7 @@ def main():
     if uploaded_file and st.sidebar.button("Add to Knowledge Base"):
         add_pdf(assistant, BytesIO(uploaded_file.read()))
     
-    query = st.text_input("Ask your questions:")
+    query = st.text_input("Ask your questions:", placeholder="Ask ChatGPT")
 
     if st.button("Get answer"):
         # Check for empty questions
