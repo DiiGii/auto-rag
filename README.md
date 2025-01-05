@@ -26,4 +26,4 @@ Otherwise, check out the app on Streamlit:
 1. https://dii-gii-auto-rag.streamlit.app/
 
 ## Conclusion
-A beautiful, easy-to-use tool for AutoRAG. I would highly recommend trying to implement this project yourself, as it gives you insight into various aspects of AI application development: database setup, LLM APIs, and building out the UX and UI. Please 
+A beautiful, easy-to-use tool for AutoRAG. I would highly recommend trying to implement this project yourself, as it gives you insight into various aspects of AI application development: database setup, LLM APIs, and building out the UX and UI. Please note that a valid OpenAI API key is necessary to use this app -- invalid ones will be rejected and ones without credit will return error messages. 
