@@ -11,6 +11,7 @@ from phi.tools.duckduckgo import DuckDuckGo
 from phi.embedder.openai import OpenAIEmbedder
 from phi.vectordb.pgvector import PgVector2
 from phi.storage.assistant.postgres import PgAssistantStorage
+import openai
 
 # Apply nest_asyncio for nested event loops, for streamlit
 nest_asyncio.apply()
@@ -64,6 +65,16 @@ def add_pdf(assistant: Assistant, file: BytesIO):
 def query_assistant(assistant: Assistant, query: str) -> str:
     return "".join([x for x in assistant.run(query)])
 
+# Check if OpenAI API key is valid
+def check_openai_api_key(api_key: str) -> bool:
+    client = openai.OpenAI(api_key=api_key)
+    try:
+        client.models.list()
+    except openai.AuthenticationError:
+        return False
+    else:
+        return True
+
 # Main function, handle Streamlit UI/UX
 def main():
     st.set_page_config(page_title="AutoRAG", layout="wide")
@@ -72,6 +83,9 @@ def main():
     api_key = st.sidebar.text_input("Enter your OpenAI API Key", type="password")
     if not api_key:
         st.sidebar.warning("Enter OpenAI API Key to continue.")
+        st.stop()
+    if not check_openai_api_key(api_key):
+        st.sidebar.warning("Please enter a valid OpenAI API Key.")
         st.stop()
     
     assistant = setup_assistant(api_key)
