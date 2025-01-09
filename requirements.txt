@@ -12,3 +12,12 @@ duckduckgo-search
 ollama
 langchain
 langchain_community
+langchain-openai
+langchain-ollama
+groq
+langchain-groq
+beautifulsoup4
+langchain_google_genai
+PyPDF2
+python-dotenv
+scikit-learn
