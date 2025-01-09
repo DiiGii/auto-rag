@@ -9,3 +9,6 @@ requests
 sqlalchemy
 pypdf
 duckduckgo-search
+ollama
+langchain
+langchain_community
